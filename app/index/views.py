@@ -1,3 +1,4 @@
+# Импортируем данные
 from flask import Blueprint, render_template
 
 from utils import get_posts_all, get_post_by_pk, get_comments_by_post_id
@@ -5,12 +6,17 @@ from utils import get_posts_all, get_post_by_pk, get_comments_by_post_id
 index_blueprint = Blueprint('index_blueprint', __name__, template_folder='templates')
 
 
+# Создаем представление для всех постов
 @index_blueprint.route('/')
 def index():
-    list_data = get_posts_all()
-    return render_template('index.html', content=list_data)
+    try:
+        list_data = get_posts_all()
+        return render_template('index.html', content=list_data)
+    except TypeError:
+        return 'Ошибка. Файл не найден или поврежден'
 
 
+# Получаем комментарий из файла json у определенных постов
 @index_blueprint.route('/posts/<int:post_id>')
 def get_post(post_id):
     list_comments = get_comments_by_post_id(post_id)

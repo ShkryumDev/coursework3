@@ -1,6 +1,7 @@
+# Импортируем данные
 import logging
 
-
+# Логируем обращения к эндпоинтам. Используем стандартный logging с форматом INFO
 logger_one = logging.getLogger('one')
 logger_two = logging.getLogger('two')
 console_handler = logging.StreamHandler()
